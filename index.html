@@ -3,33 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <title>Valentine?</title>
+
   <style>
     body {
       height: 100vh;
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #ffe6f0;
+      background: linear-gradient(135deg, #ffe6f0, #fff);
       font-family: Arial, sans-serif;
       overflow: hidden;
+      position: relative;
     }
 
+    /* Floating animation */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* Main text container */
     .container {
       text-align: center;
+      position: relative;
+      z-index: 2;
+      top: 40%;
+      transform: translateY(-50%);
     }
 
     h1 {
       font-size: 2.5rem;
       color: #d63384;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     button {
       padding: 15px 30px;
       font-size: 1.2rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
     }
 
@@ -44,10 +61,45 @@
       color: white;
       position: absolute;
     }
+
+    /* Character images */
+    .character {
+      position: absolute;
+      width: 180px;
+      opacity: 0.95;
+      animation: float 5s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    #dota {
+      left: 5%;
+      bottom: 12%;
+      animation-duration: 4.5s;
+    }
+
+    #biryani {
+      right: 5%;
+      bottom: 14%;
+      animation-duration: 5.5s;
+    }
+
+    #chill {
+      left: 50%;
+      bottom: 3%;
+      transform: translateX(-50%);
+      animation-duration: 6.5s;
+    }
   </style>
 </head>
+
 <body>
 
+  <!-- Background characters -->
+  <img src="dota.png" class="character" id="dota" alt="Gamer boy playing Dota">
+  <img src="biryani.png" class="character" id="biryani" alt="Boy eating biryani">
+  <img src="chill.png" class="character" id="chill" alt="Chill hoodie boy">
+
+  <!-- Main content -->
   <div class="container">
     <h1>Baby, will you be my Valentine? 💕</h1>
     <button id="yes">Yes</button>
@@ -58,6 +110,7 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
 
+    // No button runs away
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -65,11 +118,20 @@
       noBtn.style.top = y + "px";
     });
 
+    // Yes button action
     yesBtn.addEventListener("click", () => {
       document.body.innerHTML = `
-        <h1 style="color:#d63384; font-size:3rem; text-align:center;">
-          Good boy 🐶💖
-        </h1>
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background:#ffe6f0;
+        ">
+          <h1 style="color:#d63384; font-size:3rem;">
+            Good boy 🐶💖
+          </h1>
+        </div>
       `;
     });
   </script>
